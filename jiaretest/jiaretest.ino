@@ -22,7 +22,7 @@ unsigned long shangcijilu;
 short xianshiz = 0;
 
 void setup() {
-  jiluzhouqi=300000/jiluc; //记录周期60秒
+  jiluzhouqi=300000/jiluc; //记录周期300秒
   pinMode(zhenjiao,OUTPUT); 
   pinMode(8,INPUT_PULLUP); 
   pinMode(9,INPUT_PULLUP); 
