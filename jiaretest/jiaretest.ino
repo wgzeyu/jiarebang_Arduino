@@ -20,6 +20,8 @@ int dazhouqi = 200; //大循环逻辑判断与测温显示时间
 int jiluzhouqi = 0; //初始化时计算
 unsigned long shangcijilu;
 short xianshiz = 0;
+float jtem;
+short switcha;
 
 void setup() {
   jiluzhouqi=300000/jiluc; //记录周期300秒
@@ -179,19 +181,32 @@ short pxy(float sj,float sm,double bs){
 
 void xunhuan() {
   nowtem=lm75a_sensor.getTemperatureInDegrees();
+  if(zhuangtai==0 && switcha==0)
+  {
+    nowtem=nowtem-jtem;
+  }
   if(zhuangtai==0)
   {
+    digitalWrite(zhenjiao, HIGH);
     if(settem-nowtem>=tem0)
     {
       zhuangtai=1;
+      digitalWrite(zhenjiao, LOW);
+      delay(200);
     }
-    digitalWrite(zhenjiao, HIGH);
+    if(switcha==1)
+    {
+      switcha=0;
+      delay(200);
+      jtem=lm75a_sensor.getTemperatureInDegrees()-nowtem;
+    }
   }
   else if(zhuangtai==1)
   {
     if(nowtem-settem>=tem1)
     {
       zhuangtai=0;
+      switcha=1;
     }
     digitalWrite(zhenjiao, LOW);
   }
