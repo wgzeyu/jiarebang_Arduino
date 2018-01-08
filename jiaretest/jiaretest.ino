@@ -22,6 +22,7 @@ unsigned long shangcijilu;
 short xianshiz = 0;
 float jtem;
 short switcha;
+boolean start = false;
 
 void setup() {
   jiluzhouqi=300000/jiluc; //记录周期300秒
@@ -181,6 +182,14 @@ short pxy(float sj,float sm,double bs){
 
 void xunhuan() {
   nowtem=lm75a_sensor.getTemperatureInDegrees();
+  if(!start)
+  {
+    start=true;
+    for (int i=0; i<jiluc ;i++)
+    {
+      jilu[i]=nowtem;
+    }
+  }
   if(zhuangtai==0 && switcha==0)
   {
     nowtem=nowtem-jtem;
